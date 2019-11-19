@@ -29,16 +29,23 @@ function updateColors(prevStyle, prevColors, shouldUpdate) {
   style.appendChild(document.createTextNode(""))
   document.head.appendChild(style)
 
-  style.sheet.insertRule("#header { background-color: " + newColors.bg +
-    "; border-color: " + newColors.hi + " }", 0)
+  style.sheet.insertRule(".bg-bg { background-color: " + newColors.bg +
+    " !important; border-color: " + newColors.hi + " !important }", 0)
 
   style.sheet.insertRule(".underline::after { border-color: " + newColors.hi + " }", 1)
   style.sheet.insertRule("a { color: " + newColors.hi + " }", 2)
+
+
+  style.sheet.insertRule(".hi-bg { background-color: " + newColors.hi + " }", 3)
+  style.sheet.insertRule(".bg-text { color: " + newColors.bg + " }", 4)
+
+  style.sheet.insertRule(`#side span { background-color: ${newColors.bg}; box-shadow: -0.2em 0 0 0.4em ${newColors.bg}, 0.2em 0 0 0.4em ${newColors.bg}, 0.2em 0.3em 1px 0.2em #BAE;`, 5)
+
   // if hicolor matches our hover color (#A0F = purple), 
   // change the hover color #0AF = blue)
   if (newColors.hi == "#A0F")
-    style.sheet.insertRule("a:hover { color: #0AF !important }", 3)
-
+    style.sheet.insertRule("a:hover { color: #0AF !important }", 6)
+  
   setTimeout(function () {
     updateColors(style, newColors, { bg: !shouldUpdate.bg, hi: !shouldUpdate.hi })
   }, Math.floor(Math.random() * 800 + 1000))
